@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICarRepositoryContract } from './ICar.repository-contract';
+import { TABLE } from 'src/@shared/metadata';
 
 @Injectable()
 export class CarTypeormRepository implements ICarRepositoryContract {

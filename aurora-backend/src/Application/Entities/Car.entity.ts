@@ -27,6 +27,9 @@ export class CarEntity {
   @Column({ type: 'varchar', length: 4 })
   year: string; // ano
 
+  @Column({ type: 'varchar', nullable: true })
+  imageUrl: string | null;
+
   @Column({ type: 'varchar', length: 40, nullable: true, default: null })
   WYSIWYGId: string | null;
 
@@ -41,7 +44,7 @@ export class CarEntity {
 }
 
 export type CarUpdateEntity = Partial<
-  Pick<CarEntity, 'model' | 'brand' | 'year'>
+  Pick<CarEntity, 'model' | 'brand' | 'year' | 'imageUrl'>
 >;
 
 export type CarUniqueRefs = RequireOnlyOne<

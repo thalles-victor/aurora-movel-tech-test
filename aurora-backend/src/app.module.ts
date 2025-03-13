@@ -8,6 +8,7 @@ import { CarEntity } from './Application/Entities/Car.entity';
 import { WYSIWYGEntity } from './Application/Entities/WYSIWYG.entity';
 import { AuthModule } from './Application/Domains/Auth/Auth.module';
 import { APP_PIPE } from '@nestjs/core';
+import { CarModule } from './Application/Domains/Car/Car.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { APP_PIPE } from '@nestjs/core';
       synchronize: true, // disable when deploying
     }),
     AuthModule,
+    CarModule,
   ],
   controllers: [AppController],
   providers: [
