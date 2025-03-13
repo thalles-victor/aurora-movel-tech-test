@@ -1,0 +1,16 @@
+services:
+  aurora-movel-database:
+    container_name : aurora-movel-database 
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    env_file:
+      - "./aurora-backend/.env"
+    volumes:
+      - '.:/postgres/data'
+    networks:
+      - aurora-network
+
+networks:
+  aurora-network:
+    driver: bridge
