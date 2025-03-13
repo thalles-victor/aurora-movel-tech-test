@@ -7,6 +7,7 @@ import { UserEntity } from './Application/Entities/User.entity';
 import { BrandEntity } from './Application/Entities/Brand.enitty';
 import { CarEntity } from './Application/Entities/Car.entity';
 import { WYSIWYGEntity } from './Application/Entities/WYSIWYG.entity';
+import { AuthModule } from './Application/Domains/Auth/Auth.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { WYSIWYGEntity } from './Application/Entities/WYSIWYG.entity';
       entities: [UserEntity, BrandEntity, CarEntity, WYSIWYGEntity],
       synchronize: true, // disable when deploying
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

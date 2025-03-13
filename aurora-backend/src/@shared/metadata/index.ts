@@ -9,4 +9,9 @@ export enum TABLE {
 export enum ROLE {
   USER = 'USER',
   ADMIN = 'ADMIN',
+  ROOT = 'ROOT',
+}
+
+export enum KEY_OF_INJECTION {
+  USER_REPOSITORY = 'USER_REPOSITORY',
 }

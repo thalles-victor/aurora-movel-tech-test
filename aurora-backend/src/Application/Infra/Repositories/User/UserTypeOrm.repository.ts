@@ -7,10 +7,14 @@ import { IUserRepositoryContract } from './User.repository-contract';
 import { Repository } from 'typeorm';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { splitKeyAndValue } from 'src/@shared/utils';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class UserTypeOrmRepository implements IUserRepositoryContract {
-  constructor(private readonly userRepository: Repository<UserEntity>) {}
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+  ) {}
 
   async getBy(unqRef: UserUniqueRefs): Promise<UserEntity | null> {
     const [key, value] = splitKeyAndValue(unqRef);
@@ -38,7 +42,7 @@ export class UserTypeOrmRepository implements IUserRepositoryContract {
           .values([{ ...entity }])
           .returning('*')
           .execute()
-      ).raw;
+      ).raw[0];
 
       return result;
     } catch (e) {
@@ -62,7 +66,7 @@ export class UserTypeOrmRepository implements IUserRepositoryContract {
           .set(updEntity)
           .where(`${key} = :${key}`, { [key]: value })
           .execute()
-      ).raw;
+      ).raw[0];
 
       return result;
     } catch (e) {
@@ -85,7 +89,7 @@ export class UserTypeOrmRepository implements IUserRepositoryContract {
           .set({ deletedAt: new Date() })
           .where(`${key} = :${key}`, { [key]: value })
           .execute()
-      ).raw;
+      ).raw[0];
 
       return result;
     } catch (e) {
