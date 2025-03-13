@@ -1,4 +1,8 @@
-import { CarEntity } from 'src/Application/Entities/Car.entity';
+import {
+  CarEntity,
+  CarUniqueRefs,
+  CarUpdateEntity,
+} from 'src/Application/Entities/Car.entity';
 import { Repository } from 'typeorm';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,10 +15,7 @@ export class CarTypeormRepository implements ICarRepositoryContract {
     private readonly carRepository: Repository<CarEntity>,
   ) {}
 
-  async getBy(
-    unqRef: Required<Pick<Pick<CarEntity, 'id'>, 'id'>> &
-      Partial<Record<never, never>>,
-  ): Promise<CarEntity | null> {
+  async getBy(unqRef: CarUniqueRefs): Promise<CarEntity | null> {
     try {
       const car = await this.carRepository.findOne({
         where: { id: unqRef.id },
@@ -48,9 +49,8 @@ export class CarTypeormRepository implements ICarRepositoryContract {
   }
 
   async update(
-    unqRef: Required<Pick<Pick<CarEntity, 'id'>, 'id'>> &
-      Partial<Record<never, never>>,
-    updEntity: Partial<Pick<CarEntity, 'name' | 'brand'>>,
+    unqRef: CarUniqueRefs,
+    updEntity: CarUpdateEntity,
   ): Promise<CarEntity> {
     try {
       const queryBuilder = this.carRepository.createQueryBuilder();
@@ -71,10 +71,7 @@ export class CarTypeormRepository implements ICarRepositoryContract {
     }
   }
 
-  async softDelete(
-    unqRef: Required<Pick<Pick<CarEntity, 'id'>, 'id'>> &
-      Partial<Record<never, never>>,
-  ): Promise<CarEntity> {
+  async softDelete(unqRef: CarUniqueRefs): Promise<CarEntity> {
     try {
       const queryBuilder = this.carRepository.createQueryBuilder();
 
@@ -94,10 +91,7 @@ export class CarTypeormRepository implements ICarRepositoryContract {
     }
   }
 
-  async delete(
-    unqRef: Required<Pick<Pick<CarEntity, 'id'>, 'id'>> &
-      Partial<Record<never, never>>,
-  ): Promise<void> {
+  async delete(unqRef: CarUniqueRefs): Promise<void> {
     try {
       await this.carRepository.delete({ id: unqRef.id });
     } catch (e) {

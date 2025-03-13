@@ -1,4 +1,8 @@
-import { CarEntity } from 'src/Application/Entities/Car.entity';
+import {
+  CarEntity,
+  CarUniqueRefs,
+  CarUpdateEntity,
+} from 'src/Application/Entities/Car.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ICarRepositoryContract } from './ICar.repository-contract';
 
@@ -6,10 +10,7 @@ import { ICarRepositoryContract } from './ICar.repository-contract';
 export class CarInMemoryRepository implements ICarRepositoryContract {
   private cars: CarEntity[] = [];
 
-  async getBy(
-    unqRef: Required<Pick<Pick<CarEntity, 'id'>, 'id'>> &
-      Partial<Record<never, never>>,
-  ): Promise<CarEntity | null> {
+  async getBy(unqRef: CarUniqueRefs): Promise<CarEntity | null> {
     const car = this.cars.find((car) => car.id === unqRef.id);
     return car ?? null;
   }
@@ -21,9 +22,8 @@ export class CarInMemoryRepository implements ICarRepositoryContract {
   }
 
   async update(
-    unqRef: Required<Pick<Pick<CarEntity, 'id'>, 'id'>> &
-      Partial<Record<never, never>>,
-    updEntity: Partial<Pick<CarEntity, 'name' | 'brand'>>,
+    unqRef: CarUniqueRefs,
+    updEntity: CarUpdateEntity,
   ): Promise<CarEntity> {
     const carIndex = this.cars.findIndex((car) => car.id === unqRef.id);
     if (carIndex === -1) {
@@ -35,10 +35,7 @@ export class CarInMemoryRepository implements ICarRepositoryContract {
     return updatedCar;
   }
 
-  async softDelete(
-    unqRef: Required<Pick<Pick<CarEntity, 'id'>, 'id'>> &
-      Partial<Record<never, never>>,
-  ): Promise<CarEntity> {
+  async softDelete(unqRef: CarUniqueRefs): Promise<CarEntity> {
     const carIndex = this.cars.findIndex((car) => car.id === unqRef.id);
     if (carIndex === -1) {
       throw new NotFoundException(`Car with id ${unqRef.id} not found`);
@@ -49,10 +46,7 @@ export class CarInMemoryRepository implements ICarRepositoryContract {
     return updatedCar;
   }
 
-  async delete(
-    unqRef: Required<Pick<Pick<CarEntity, 'id'>, 'id'>> &
-      Partial<Record<never, never>>,
-  ): Promise<void> {
+  async delete(unqRef: CarUniqueRefs): Promise<void> {
     const carIndex = this.cars.findIndex((car) => car.id === unqRef.id);
     if (carIndex === -1) {
       throw new NotFoundException(`Car with id ${unqRef.id} not found`);

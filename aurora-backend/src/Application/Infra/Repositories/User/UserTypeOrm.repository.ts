@@ -52,7 +52,7 @@ export class UserTypeOrmRepository implements IUserRepositoryContract {
   }
 
   async update(
-    unqRef: Partial<Pick<UserEntity, 'id' | 'email'>>,
+    unqRef: UserUniqueRefs,
     updEntity: UserUpdateEntity,
   ): Promise<UserEntity> {
     const [key, value] = splitKeyAndValue(unqRef);
@@ -75,9 +75,7 @@ export class UserTypeOrmRepository implements IUserRepositoryContract {
     }
   }
 
-  async softDelete(
-    unqRef: Partial<Pick<UserEntity, 'id' | 'email'>>,
-  ): Promise<UserEntity> {
+  async softDelete(unqRef: UserUniqueRefs): Promise<UserEntity> {
     const [key, value] = splitKeyAndValue(unqRef);
 
     try {
@@ -98,9 +96,7 @@ export class UserTypeOrmRepository implements IUserRepositoryContract {
     }
   }
 
-  async delete(
-    unqRef: Partial<Pick<UserEntity, 'id' | 'email'>>,
-  ): Promise<void> {
+  async delete(unqRef: UserUniqueRefs): Promise<void> {
     const [key, value] = splitKeyAndValue(unqRef);
 
     try {

@@ -23,7 +23,7 @@ export class UserInMemoryRepository implements IUserRepositoryContract {
   }
 
   async update(
-    unqRef: Partial<Pick<UserEntity, 'id' | 'email'>>,
+    unqRef: UserUniqueRefs,
     updEntity: UserUpdateEntity,
   ): Promise<UserEntity> {
     const [key, value] = Object.entries(unqRef)[0]; // Extrai chave e valor do unqRef
@@ -38,9 +38,7 @@ export class UserInMemoryRepository implements IUserRepositoryContract {
     return updatedUser;
   }
 
-  async softDelete(
-    unqRef: Partial<Pick<UserEntity, 'id' | 'email'>>,
-  ): Promise<UserEntity> {
+  async softDelete(unqRef: UserUniqueRefs): Promise<UserEntity> {
     const [key, value] = Object.entries(unqRef)[0]; // Extrai chave e valor do unqRef
     const userIndex = this.users.findIndex((user) => user[key] === value);
 
@@ -53,9 +51,7 @@ export class UserInMemoryRepository implements IUserRepositoryContract {
     return updatedUser;
   }
 
-  async delete(
-    unqRef: Partial<Pick<UserEntity, 'id' | 'email'>>,
-  ): Promise<void> {
+  async delete(unqRef: UserUniqueRefs): Promise<void> {
     const [key, value] = Object.entries(unqRef)[0]; // Extrai chave e valor do unqRef
     const userIndex = this.users.findIndex((user) => user[key] === value);
 
