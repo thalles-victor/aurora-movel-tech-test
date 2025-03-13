@@ -9,6 +9,7 @@ import { WYSIWYGEntity } from './Application/Entities/WYSIWYG.entity';
 import { AuthModule } from './Application/Domains/Auth/Auth.module';
 import { APP_PIPE } from '@nestjs/core';
 import { CarModule } from './Application/Domains/Car/Car.module';
+import { UploadModule } from './Application/Domains/Upload/Upload.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CarModule } from './Application/Domains/Car/Car.module';
     }),
     AuthModule,
     CarModule,
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [
