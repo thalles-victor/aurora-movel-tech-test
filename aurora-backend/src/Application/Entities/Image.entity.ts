@@ -16,6 +16,9 @@ export class ImageEntity {
   @Column({ type: 'varchar', length: 10 })
   provider: 'LOCAL' | 'S3';
 
+  @Column({ type: 'timestamptz', nullable: true, default: null })
+  deletedAt: Date | null;
+
   @Column({ type: 'timestamptz' })
   createdAt: Date;
 

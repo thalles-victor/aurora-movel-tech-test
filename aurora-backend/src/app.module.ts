@@ -10,6 +10,7 @@ import { AuthModule } from './Application/Domains/Auth/Auth.module';
 import { APP_PIPE } from '@nestjs/core';
 import { CarModule } from './Application/Domains/Car/Car.module';
 import { UploadModule } from './Application/Domains/Upload/Upload.module';
+import { ImageEntity } from './Application/Entities/Image.entity';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { UploadModule } from './Application/Domains/Upload/Upload.module';
       database: ENV.POSTGRES_DB,
       username: ENV.POSTGRES_USER,
       password: ENV.POSTGRES_PASSWORD,
-      entities: [UserEntity, CarEntity, WYSIWYGEntity],
+      entities: [UserEntity, CarEntity, WYSIWYGEntity, ImageEntity],
       synchronize: true, // disable when deploying
     }),
     AuthModule,
