@@ -42,3 +42,23 @@ export function generateRandomFileName(originalFileName: string): string {
 
   return newFileName;
 }
+
+export function generateShortId(length: number = 14): string {
+  if (length < 10) {
+    throw new Error(
+      'Length must be at least 10 characters for reasonable uniqueness',
+    );
+  }
+
+  const timestamp = Date.now().toString(36);
+
+  const randomLength = length - timestamp.length - 1;
+
+  const randomPart = Math.random()
+    .toString(36)
+    .substr(2, randomLength > 0 ? randomLength : 1); // Garante pelo menos 1 caractere
+
+  const fullId = `${timestamp}-${randomPart}`;
+
+  return fullId.substr(0, length);
+}

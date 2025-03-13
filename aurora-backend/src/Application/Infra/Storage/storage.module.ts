@@ -7,4 +7,4 @@ import { S3StorageService } from './s3-storage.sevice';
   providers: [StorageService, LocalStorageService, S3StorageService],
   exports: [StorageService],
 })
-export class LocalStorageModule {}
+export class StorageModule {}
