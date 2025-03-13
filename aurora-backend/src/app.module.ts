@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ENV } from './@shared/env';
+import { UserEntity } from './Application/Entities/User.entity';
 
 @Module({
   imports: [
@@ -13,7 +14,7 @@ import { ENV } from './@shared/env';
       database: ENV.POSTGRES_DB,
       username: ENV.POSTGRES_USER,
       password: ENV.POSTGRES_PASSWORD,
-      entities: [],
+      entities: [UserEntity],
       synchronize: true, // disable when deploying
     }),
   ],
