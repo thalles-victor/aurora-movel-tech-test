@@ -55,6 +55,12 @@ export class CarInMemoryRepository implements ICarRepositoryContract {
     this.cars.splice(carIndex, 1);
   }
 
+  async getAllUndeletedCars(): Promise<CarEntity[]> {
+    const cars = await this.cars.filter((car) => car.deletedAt === null);
+
+    return cars;
+  }
+
   clear(): void {
     this.cars = [];
   }

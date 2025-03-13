@@ -6,4 +6,6 @@ import {
 import { IBaseRepositoryContract } from '../IBase.repository-contract';
 
 export interface ICarRepositoryContract
-  extends IBaseRepositoryContract<CarEntity, CarUpdateEntity, CarUniqueRefs> {}
+  extends IBaseRepositoryContract<CarEntity, CarUpdateEntity, CarUniqueRefs> {
+  getAllUndeletedCars(): Promise<CarEntity[]>;
+}

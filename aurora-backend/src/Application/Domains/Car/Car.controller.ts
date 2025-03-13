@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CreateCarDto } from './dtos/CreateCar.dto';
 import { CarService } from './Car.service';
 
@@ -9,5 +9,10 @@ export class CarController {
   @Post()
   create(@Body() createCarDto: CreateCarDto) {
     return this.carService.create(createCarDto);
+  }
+
+  @Get('all')
+  getAllUndeletedCars() {
+    return this.carService.getGetAllCarsNonDeleted();
   }
 }

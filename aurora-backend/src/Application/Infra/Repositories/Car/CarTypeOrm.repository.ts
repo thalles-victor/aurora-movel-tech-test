@@ -100,4 +100,12 @@ export class CarTypeormRepository implements ICarRepositoryContract {
       throw new InternalServerErrorException();
     }
   }
+
+  async getAllUndeletedCars(): Promise<CarEntity[]> {
+    const query = `SELECT * FROM ${TABLE.car} WHERE "deletedAt" IS NULL`;
+
+    const result = await this.carRepository.query(query);
+
+    return result;
+  }
 }

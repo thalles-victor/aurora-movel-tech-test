@@ -53,4 +53,10 @@ export class CarService {
 
     return carCreated;
   }
+
+  async getGetAllCarsNonDeleted() {
+    const cars = await this.carRepository.getAllUndeletedCars();
+
+    return cars;
+  }
 }
