@@ -9,18 +9,26 @@ export class CarEntity {
   @PrimaryColumn({ type: 'varchar', length: 40 })
   id: string;
 
-  @Column({ type: 'varchar', length: 20 })
-  @Index()
-  name: string;
+  @Column({ type: 'varchar', length: 20, unique: true })
+  licensePlate: string; // placa
+
+  @Column({ type: 'varchar', length: 40, unique: true })
+  chassis: string; // chassi
+
+  @Column({ type: 'varchar', length: 40, unique: true })
+  registrationNumber: string; //renovam
 
   @Column({ type: 'varchar', length: 40 })
-  shortDescription: string;
+  model: string; // modelo
 
   @Column({ type: 'varchar', length: 40 })
-  brand: string;
+  brand: string; // marca
 
-  @Column({ type: 'varchar', length: 40 })
-  WYSIWYGId: string;
+  @Column({ type: 'varchar', length: 4 })
+  year: string; // ano
+
+  @Column({ type: 'varchar', length: 40, nullable: true, default: null })
+  WYSIWYGId: string | null;
 
   @Column({ type: 'timestamptz', nullable: true, default: null })
   deletedAt: Date | null;
@@ -32,6 +40,10 @@ export class CarEntity {
   updateAt: Date;
 }
 
-export type CarUpdateEntity = Partial<Pick<CarEntity, 'name' | 'brand'>>;
+export type CarUpdateEntity = Partial<
+  Pick<CarEntity, 'model' | 'brand' | 'year'>
+>;
 
-export type CarUniqueRefs = RequireOnlyOne<Pick<CarEntity, 'id'>>;
+export type CarUniqueRefs = RequireOnlyOne<
+  Pick<CarEntity, 'id' | 'licensePlate' | 'chassis' | 'registrationNumber'>
+>;
