@@ -17,7 +17,7 @@ export class CarEntity {
   shortDescription: string;
 
   @Column({ type: 'varchar', length: 40 })
-  brandId: string;
+  brand: string;
 
   @Column({ type: 'varchar', length: 40 })
   WYSIWYGId: string;
@@ -32,6 +32,6 @@ export class CarEntity {
   updateAt: Date;
 }
 
-export type CarUpdateEntity = Partial<Pick<CarEntity, 'name'>>;
+export type CarUpdateEntity = Partial<Pick<CarEntity, 'name' | 'brand'>>;
 
 export type CarUniqueRefs = RequireOnlyOne<Pick<CarEntity, 'id'>>;
