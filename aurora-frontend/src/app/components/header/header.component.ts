@@ -11,9 +11,19 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   user: User | null = null;
+  isRoot: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(private readonly authService: AuthService) {
     this.user = authService.getCurrentUser();
+
+    if (this.user?.roles.includes('ROOT')) {
+      this.isRoot = true;
+    }
+
+    if (this.user?.roles.includes('ADMIN')) {
+      this.isAdmin = true;
+    }
   }
 
   logout() {

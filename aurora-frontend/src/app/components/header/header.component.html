@@ -7,6 +7,14 @@
     </div>
 
     <div *ngIf="user" class="account" class="account-section">
+      <a href="/root" *ngIf="isRoot">
+        <img width="32px" class="shild-icon" src="assets/icons/shild.svg" />
+      </a>
+
+      <a href="/admin" *ngIf="isAdmin">
+        <img width="32px" class="cars-icon" src="assets/icons/cars.svg" />
+      </a>
+
       <img width="32px" class="profile-icon" src="assets/icons/account.svg" />
       <img
         (click)="logout()"

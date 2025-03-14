@@ -49,6 +49,10 @@ a:hover {
   transition: opacity 150ms;
 }
 
+.profile-icon {
+  opacity: 0.5;
+}
+
 .profile-icon:hover {
   cursor: not-allowed;
 }
@@ -56,4 +60,8 @@ a:hover {
 .logout-icon:hover {
   cursor: pointer;
   opacity: 0.7;
+}
+
+.shild-icon {
+  cursor: pointer;
 }
