@@ -23,7 +23,7 @@ export class CarService {
       licensePlate: createCardDto.licensePlate,
     });
 
-    if (licenseInUse) {
+    if (licenseInUse && !licenseInUse.deletedAt) {
       throw new ConflictException('license in use');
     }
 
@@ -31,7 +31,7 @@ export class CarService {
       chassis: createCardDto.chassis,
     });
 
-    if (chassisInUse) {
+    if (chassisInUse && !chassisInUse.deletedAt) {
       throw new ConflictException('chassis in use');
     }
 
@@ -39,7 +39,7 @@ export class CarService {
       registrationNumber: createCardDto.registrationNumber,
     });
 
-    if (registrationNumberInUse) {
+    if (registrationNumberInUse && !registrationNumberInUse.deletedAt) {
       throw new ConflictException('registrationNumber in use');
     }
 

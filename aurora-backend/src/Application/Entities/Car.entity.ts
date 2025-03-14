@@ -9,13 +9,13 @@ export class CarEntity {
   @PrimaryColumn({ type: 'varchar', length: 40 })
   id: string;
 
-  @Column({ type: 'varchar', length: 20, unique: true })
+  @Column({ type: 'varchar', length: 20 })
   licensePlate: string; // placa
 
-  @Column({ type: 'varchar', length: 40, unique: true })
+  @Column({ type: 'varchar', length: 40 })
   chassis: string; // chassi
 
-  @Column({ type: 'varchar', length: 40, unique: true })
+  @Column({ type: 'varchar', length: 40 })
   registrationNumber: string; //renovam
 
   @Column({ type: 'varchar', length: 40 })

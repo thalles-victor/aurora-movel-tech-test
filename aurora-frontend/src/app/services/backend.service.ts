@@ -81,4 +81,32 @@ export class BackendService {
       })
     );
   }
+
+  getAllCars() {
+    const url = `${this.apiBaseUrl}/v1/car/all`;
+    return this.http.get(url).pipe(
+      catchError((err) => {
+        const errorMessage = err.error?.message || 'erro ao buscar os carros';
+        return throwError(() => ({
+          status: err.status,
+          message: errorMessage,
+          error: err.error,
+        }));
+      })
+    );
+  }
+
+  softDeleteCar(carId: string) {
+    const url = `${this.apiBaseUrl}/v1/car/soft/${carId}`;
+    return this.http.delete(url).pipe(
+      catchError((err) => {
+        const errorMessage = err.error?.message || 'erro ao deletar o carro';
+        return throwError(() => ({
+          status: err.status,
+          message: errorMessage,
+          error: err.error,
+        }));
+      })
+    );
+  }
 }

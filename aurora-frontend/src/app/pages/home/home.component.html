@@ -23,12 +23,8 @@
   <section class="car-section">
     <h1>Carros</h1>
 
-    <section class="car-grid">
-      <app-car-card />
-      <app-car-card />
-      <app-car-card />
-      <app-car-card />
-      <app-car-card />
+    <section class="car-fields">
+      <app-car-card *ngFor="let car of cars" [car]="car"></app-car-card>
     </section>
   </section>
 </div>
