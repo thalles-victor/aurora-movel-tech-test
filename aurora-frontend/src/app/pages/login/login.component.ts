@@ -22,14 +22,19 @@ export class LoginComponent {
 
   login() {
     this.authService.login(this.email, this.password).subscribe({
-      next: () => {
+      next: (response) => {
         this.router.navigate(['/']).then(() => {
           window.location.reload();
         });
       },
       error: (err) => {
-        this.error = 'Error ao fazer login. Verifique suas credenciais';
         console.error(err);
+
+        if (err.status === 401) {
+          this.error = err.message; // Exibe a mensagem do backend, ex.: "email in used"
+        } else {
+          this.error = 'Erro ao fazer login. Tente novamente.';
+        }
       },
     });
   }

@@ -1,7 +1,7 @@
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import { StateKey, TransferState, makeStateKey } from '@angular/core'; // Atualizado para Angular 19
 import { isPlatformBrowser } from '@angular/common';
 import { AuthResponse, User } from '../../@shared/types';
@@ -13,7 +13,6 @@ const TOKEN_KEY: StateKey<string> = makeStateKey<string>('accessToken');
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/v1/auth/sign-in';
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
@@ -42,8 +41,13 @@ export class AuthService {
     }
   }
 
-  login(email: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(this.apiUrl, { email, password }).pipe(
+  createAccount(
+    name: string,
+    email: string,
+    password: string
+  ): Observable<AuthResponse> {
+    const apiUrl = 'http://localhost:3000/v1/auth/sign-up';
+    return this.http.post<AuthResponse>(apiUrl, { name, email, password }).pipe(
       tap((response) => {
         this.currentUserSubject.next(response.user);
         if (isPlatformBrowser(this.platformId)) {
@@ -53,6 +57,42 @@ export class AuthService {
 
         this.transferState.set(USER_KEY, response.user);
         this.transferState.set(TOKEN_KEY, response.accessToken.token);
+      }),
+      catchError((err) => {
+        const errorMessage =
+          err.error?.message ||
+          'Erro ao registrar. Verifique os dados fornecidos.';
+        return throwError(() => ({
+          status: err.status,
+          message: errorMessage,
+          error: err.error,
+        }));
+      })
+    );
+  }
+
+  login(email: string, password: string): Observable<AuthResponse> {
+    const apiUrl = 'http://localhost:3000/v1/auth/sign-in';
+    return this.http.post<AuthResponse>(apiUrl, { email, password }).pipe(
+      tap((response) => {
+        this.currentUserSubject.next(response.user);
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.setItem('accessToken', response.accessToken.token);
+          localStorage.setItem('currentUser', JSON.stringify(response.user));
+        }
+
+        this.transferState.set(USER_KEY, response.user);
+        this.transferState.set(TOKEN_KEY, response.accessToken.token);
+      }),
+      catchError((err) => {
+        const errorMessage =
+          err.error?.message ||
+          'Erro ao fazer login. Verifique suas credenciais.';
+        return throwError(() => ({
+          status: err.status,
+          message: errorMessage,
+          error: err.error,
+        }));
       })
     );
   }
