@@ -1,4 +1,10 @@
-import { IsString, Length, IsNotEmpty, IsOptional } from 'class-validator';
+import {
+  IsString,
+  Length,
+  IsNotEmpty,
+  IsOptional,
+  Matches,
+} from 'class-validator';
 import { Transform } from 'class-transformer';
 
 export class CreateCarDto {
@@ -33,9 +39,10 @@ export class CreateCarDto {
 
   @IsString({ message: 'Year must be a string' })
   @IsNotEmpty({ message: 'Year is required' })
-  @Length(4, 4, { message: 'Year must be exactly 4 characters' })
-  @Transform(({ value }) => value.toString(), { toClassOnly: true })
-  year: string; // ano
+  @Matches(/^\d{4}$/, {
+    message: 'Year must contain only numbers (e.g., "2020")',
+  })
+  year: string; // Ano
 
   @IsString({ message: 'Year must be a string' })
   @IsOptional({ message: 'url from image is optional' })

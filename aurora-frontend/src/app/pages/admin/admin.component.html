@@ -1,1 +1,99 @@
-<p>admin works!</p>
+<div class="container">
+  <section class="create-car-field">
+    <h5>Criar carro</h5>
+
+    <img
+      *ngIf="vehicle.imageUrl"
+      [src]="vehicle.imageUrl"
+      width="384px"
+      height="286px"
+      alt=""
+    />
+
+    <div class="form-group">
+      <label for="image">Imagem do Veículo</label>
+      <input
+        type="file"
+        id="image"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+      />
+    </div>
+
+    <div>
+      <div class="form-group">
+        <label for="licensePlate">Placa</label>
+        <input
+          type="text"
+          id="licensePlate"
+          [(ngModel)]="vehicle.licensePlate"
+          name="licensePlate"
+          placeholder="ABC-1234"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="chassis">Chassi</label>
+        <input
+          type="text"
+          id="chassis"
+          [(ngModel)]="vehicle.chassis"
+          name="chassis"
+          placeholder="9BWZZZ377HP123456"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="registrationNumber">Número de Registro</label>
+        <input
+          type="text"
+          id="registrationNumber"
+          [(ngModel)]="vehicle.registrationNumber"
+          name="registrationNumber"
+          placeholder="12345678901"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="model">Modelo</label>
+        <input
+          type="text"
+          id="model"
+          [(ngModel)]="vehicle.model"
+          name="model"
+          placeholder="Gol"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="brand">Marca</label>
+        <input
+          type="text"
+          id="brand"
+          [(ngModel)]="vehicle.brand"
+          name="brand"
+          placeholder="Volkswagen"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="year">Ano</label>
+        <input
+          type="text"
+          id="year"
+          [(ngModel)]="vehicle.year"
+          name="year"
+          placeholder="2020"
+          required
+        />
+      </div>
+      <button class="submit" (click)="createCar()">Salvar</button>
+    </div>
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+  </section>
+</div>
