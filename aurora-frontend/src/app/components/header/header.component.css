@@ -1,0 +1,33 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 40px;
+  padding-block: 20px;
+}
+
+.account-section {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.create-account {
+  border: 1px solid gray;
+  padding: 4px 8px;
+  font-size: 22px;
+  border-radius: 6px;
+  transition: background-color 150ms, color 150ms;
+}
+
+.create-account:hover {
+  background-color: black;
+  color: white;
+}
+
+.login:hover {
+  text-decoration: underline;
+}
+
+a:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,103 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 1%;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+.hero {
+  position: relative; /* Define o contêiner como referência para o posicionamento */
+  width: 100%; /* Ajusta a largura ao contêiner pai */
+}
+
+.hero img {
+  width: 100%; /* Faz a imagem ocupar toda a largura */
+  height: auto; /* Mantém a proporção */
+  display: block; /* Remove espaços indesejados abaixo da imagem */
+  /* animation: fadeIn 200ms ease-in; */
+}
+
+.text-overlay {
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+
+  position: absolute; /* Posiciona o texto sobre a imagem */
+  top: 40%; /* Centraliza verticalmente */
+  left: 50%; /* Centraliza horizontalmente */
+  transform: translate(
+    -90%,
+    -50%
+  ); /* Corrige o deslocamento para o centro exato */
+  color: white; /* Cor do texto para contrastar com a imagem */
+  text-align: start; /* Centraliza o texto */
+  padding: 20px; /* Espaçamento interno */
+  border-radius: 10px; /* Bordas arredondadas (opcional) */
+}
+
+h4 {
+  margin: 0 0 10px; /* Espaçamento abaixo do título */
+  font-size: 52px; /* Tamanho do título (ajuste conforme necessário) */
+  color: #66fc03;
+}
+
+p {
+  margin: 0; /* Remove margens padrão do parágrafo */
+  font-size: 16px; /* Tamanho do texto (ajuste conforme necessário) */
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.car-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.car-section > h1 {
+  font-size: 52px;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.5);
+  padding-block: 20px;
+}
+
+.car-grid {
+  display: grid;
+  width: 90%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 50px 20px;
+}
+
+button {
+  border: 1px solid white;
+  border-radius: 6px;
+  background-color: transparent;
+  font-size: 24px;
+  color: white;
+  width: 400px;
+  padding-block: 12px;
+  margin-top: 20px;
+
+  transition: backend-color 150ms, color 150ms;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
