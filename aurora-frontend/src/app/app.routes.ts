@@ -5,6 +5,7 @@ import { authGuard } from './guards/auth.guard';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
 import { CreateAccountComponent } from './pages/create-account/create-account.component';
 import { RootComponent } from './pages/root/root.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 export const routes: Routes = [
   {
@@ -18,14 +19,16 @@ export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    // canActivate: [authGuard],
-    // data: { role: 'USER' },
   },
   {
     path: 'root',
     component: RootComponent,
     canActivate: [authGuard],
     data: { role: 'ROOT' },
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
   },
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
