@@ -8,6 +8,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ICarRepositoryContract } from './ICar.repository-contract';
 import { TABLE } from 'src/@shared/metadata';
+import { splitKeyAndValue } from 'src/@shared/utils';
 
 @Injectable()
 export class CarTypeormRepository implements ICarRepositoryContract {
@@ -17,9 +18,11 @@ export class CarTypeormRepository implements ICarRepositoryContract {
   ) {}
 
   async getBy(unqRef: CarUniqueRefs): Promise<CarEntity | null> {
+    const [key, value] = splitKeyAndValue(unqRef);
+
     try {
       const car = await this.carRepository.findOne({
-        where: { id: unqRef.id },
+        where: { [key]: value },
       });
 
       return car ?? null;

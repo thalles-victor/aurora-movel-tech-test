@@ -22,6 +22,9 @@ export class CarService {
     const licenseInUse = await this.carRepository.getBy({
       licensePlate: createCardDto.licensePlate,
     });
+    console.log(createCardDto);
+
+    console.log(licenseInUse);
 
     if (licenseInUse) {
       throw new ConflictException('license in use');

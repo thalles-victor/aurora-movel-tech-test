@@ -19,15 +19,14 @@
 }
 
 .hero {
-  position: relative; /* Define o contêiner como referência para o posicionamento */
-  width: 100%; /* Ajusta a largura ao contêiner pai */
+  position: relative;
+  width: 100%;
 }
 
 .hero img {
-  width: 100%; /* Faz a imagem ocupar toda a largura */
-  height: auto; /* Mantém a proporção */
-  display: block; /* Remove espaços indesejados abaixo da imagem */
-  /* animation: fadeIn 200ms ease-in; */
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .text-overlay {
@@ -36,28 +35,25 @@
 
   gap: 18px;
 
-  position: absolute; /* Posiciona o texto sobre a imagem */
-  top: 40%; /* Centraliza verticalmente */
-  left: 50%; /* Centraliza horizontalmente */
-  transform: translate(
-    -90%,
-    -50%
-  ); /* Corrige o deslocamento para o centro exato */
-  color: white; /* Cor do texto para contrastar com a imagem */
-  text-align: start; /* Centraliza o texto */
-  padding: 20px; /* Espaçamento interno */
-  border-radius: 10px; /* Bordas arredondadas (opcional) */
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-90%, -50%);
+  color: white;
+  text-align: start;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 h4 {
-  margin: 0 0 10px; /* Espaçamento abaixo do título */
-  font-size: 52px; /* Tamanho do título (ajuste conforme necessário) */
+  margin: 0 0 10px;
+  font-size: 52px;
   color: #66fc03;
 }
 
 p {
-  margin: 0; /* Remove margens padrão do parágrafo */
-  font-size: 16px; /* Tamanho do texto (ajuste conforme necessário) */
+  margin: 0;
+  font-size: 16px;
   font-size: 22px;
   font-weight: 400;
 }
@@ -76,11 +72,10 @@ p {
   padding-block: 20px;
 }
 
-.car-grid {
+.car-fields {
   display: grid;
-  width: 90%;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 50px 20px;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
 button {

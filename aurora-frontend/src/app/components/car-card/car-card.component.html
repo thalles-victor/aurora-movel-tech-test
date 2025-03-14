@@ -1,7 +1,40 @@
 <div class="container">
-  <img src="assets/temp/car1.png" width="384px" height="286px" alt="" />
-  <p>
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-  </p>
-  <button>mais informações</button>
+  <div class="left">
+    <img [src]="car.imageUrl" width="384px" height="286px" alt="" />
+    <p>
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+    </p>
+  </div>
+
+  <div class="right">
+    <ul>
+      <li>
+        <span>licensePlate: {{ car.licensePlate }}</span>
+      </li>
+      <li>
+        <span>chassis: {{ car.chassis }}</span>
+      </li>
+      <li>
+        <span>registrationNumber: {{ car.registrationNumber }}</span>
+      </li>
+      <li>
+        <span>model: {{ car.model }}</span>
+      </li>
+      <li>
+        <span>brand: {{ car.brand }}</span>
+      </li>
+      <li>
+        <span>year: {{ car.year }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <img
+    src="assets/icons/trash.svg"
+    width="32px"
+    height="32px"
+    alt=""
+    class="trash-icon"
+    (click)="deleteCar()"
+  />
 </div>
