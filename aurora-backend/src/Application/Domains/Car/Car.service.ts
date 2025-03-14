@@ -1,8 +1,15 @@
-import { ConflictException, Inject, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Inject,
+  Injectable,
+  NotAcceptableException,
+  NotFoundException,
+} from '@nestjs/common';
 import { KEY_OF_INJECTION } from 'src/@shared/metadata';
 import { ICarRepositoryContract } from 'src/Application/Infra/Repositories/Car/ICar.repository-contract';
 import { CreateCarDto } from './dtos/CreateCar.dto';
 import * as uuid from 'uuid';
+import { UpdateCarDto } from './dtos/UpdateCar.dto';
 
 @Injectable()
 export class CarService {
@@ -58,5 +65,66 @@ export class CarService {
     const cars = await this.carRepository.getAllUndeletedCars();
 
     return cars;
+  }
+
+  async softDeleteCar(id: string) {
+    const carExist = await this.carRepository.getBy({ id });
+
+    if (!carExist) {
+      throw new NotFoundException('car not exist');
+    }
+
+    if (carExist.deletedAt) {
+      throw new NotAcceptableException('car already deleted');
+    }
+
+    const carDeleted = await this.carRepository.softDelete({ id });
+
+    return carDeleted;
+  }
+
+  async permanentlyDelete(id: string) {
+    const carExist = await this.carRepository.getBy({ id });
+
+    if (!carExist) {
+      throw new NotFoundException('car not exist');
+    }
+
+    const carDeleted = await this.carRepository.delete({ id });
+
+    return carDeleted;
+  }
+
+  async updateCar(carDto: UpdateCarDto) {
+    const carExist = await this.carRepository.getBy({ id: carDto.carId });
+
+    if (!carExist) {
+      throw new NotFoundException('car not exist');
+    }
+
+    const carUpdated = await this.carRepository.update(
+      {
+        id: carDto.carId,
+      },
+      {
+        brand: carDto.brand ?? undefined,
+        imageUrl: carDto.imageUrl,
+        model: carDto.model,
+        year: carDto.year,
+        updateAt: new Date(),
+      },
+    );
+
+    return carUpdated;
+  }
+
+  async getById(carId: string) {
+    const car = await this.carRepository.getBy({ id: carId });
+
+    if (!car) {
+      throw new NotFoundException('car not exist');
+    }
+
+    return car;
   }
 }

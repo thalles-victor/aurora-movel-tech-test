@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { CreateCarDto } from './dtos/CreateCar.dto';
 import { CarService } from './Car.service';
 
@@ -14,5 +14,20 @@ export class CarController {
   @Get('all')
   getAllUndeletedCars() {
     return this.carService.getGetAllCarsNonDeleted();
+  }
+
+  @Get('id/:id')
+  getCarById(@Param('id') id: string) {
+    return this.carService.getById(id);
+  }
+
+  @Delete('soft/:id')
+  softDeleCar(@Param('id') id: string) {
+    return this.carService.softDeleteCar(id);
+  }
+
+  @Delete('permanently/:id')
+  permanentlyDelete(@Param() id: string) {
+    return this.carService.permanentlyDelete(id);
   }
 }

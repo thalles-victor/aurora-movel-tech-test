@@ -45,7 +45,8 @@ export class CarEntity {
 
 export type CarUpdateEntity = Partial<
   Pick<CarEntity, 'model' | 'brand' | 'year' | 'imageUrl'>
->;
+> &
+  Pick<CarEntity, 'updateAt'>;
 
 export type CarUniqueRefs = RequireOnlyOne<
   Pick<CarEntity, 'id' | 'licensePlate' | 'chassis' | 'registrationNumber'>
