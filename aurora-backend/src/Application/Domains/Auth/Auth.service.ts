@@ -1,4 +1,10 @@
-import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Inject,
+  Injectable,
+  NotAcceptableException,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { KEY_OF_INJECTION, ROLE } from 'src/@shared/metadata';
 import { IUserRepositoryContract } from 'src/Application/Infra/Repositories/User/User.repository-contract';
 import { SignUpDto } from './dtos/SignUp.dto';
@@ -91,6 +97,28 @@ export class AuthService {
       user: rest,
       accessToken,
     };
+  }
+
+  async promoteAdmin(email: string) {
+    const user = await this.userRepository.getBy({ email });
+
+    if (!user) {
+      throw new NotFoundException('usuário não encontrado');
+    }
+
+    if (user.roles.includes(ROLE.ADMIN)) {
+      throw new NotAcceptableException('usuário já é admin');
+    }
+
+    const userUpdated = await this.userRepository.update(
+      { email },
+      {
+        roles: [ROLE.ADMIN],
+        updatedAt: new Date(),
+      },
+    );
+
+    return userUpdated;
   }
 
   private isRoot(email: string) {

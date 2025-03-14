@@ -1,0 +1,9 @@
+<div class="login-container">
+  <h2>Criar conta</h2>
+
+  <input type="text" [(ngModel)]="name" placeholder="nome" />
+  <input type="email" [(ngModel)]="email" placeholder="email" />
+  <input type="password" [(ngModel)]="password" placeholder="Senha" />
+  <button (click)="createAccount()">Entrar</button>
+  <p *ngIf="error" class="error">{{ error }}</p>
+</div>

@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Root page</h1>
+
+  <section>
+    <div class="form">
+      <h4>Criar admin</h4>
+      <input type="email" [(ngModel)]="email" placeholder="email" />
+      <button (click)="createAdmin()">cadastrar</button>
+    </div>
+
+    <p *ngIf="error" class="error">{{ error }}</p>
+  </section>
+</div>

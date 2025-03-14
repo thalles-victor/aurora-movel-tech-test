@@ -45,6 +45,9 @@ const envSchema = z.object({
   // AWS
   AWS_ACCESS_KEY_ID: z.string().optional(),
   AWS_SECRET_ACCESS_KEY: z.string().optional(),
+
+  // FRONT
+  FRONT_END_URL: z.string().nonempty(),
 });
 
 export const ENV = envSchema.parse(process.env);
