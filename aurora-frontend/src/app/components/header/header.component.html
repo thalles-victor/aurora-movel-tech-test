@@ -1,7 +1,19 @@
 <header>
-  <h1>Aurora Móvel</h1>
-  <section class="account-section">
-    <a class="login">entrar</a>
-    <a class="create-account">criar conta</a>
+  <a class="logo" href="/">Aurora Móvel</a>
+  <section>
+    <div *ngIf="!user" class="account-section">
+      <a class="login" href="/login">entrar</a>
+      <a class="create-account">criar conta</a>
+    </div>
+
+    <div *ngIf="user" class="account" class="account-section">
+      <img width="32px" class="profile-icon" src="assets/icons/account.svg" />
+      <img
+        (click)="logout()"
+        class="logout-icon"
+        height="32px"
+        src="assets/icons/logout.svg"
+      />
+    </div>
   </section>
 </header>
