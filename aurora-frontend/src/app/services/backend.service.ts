@@ -95,4 +95,18 @@ export class BackendService {
       })
     );
   }
+
+  softDeleteCar(carId: string) {
+    const url = `${this.apiBaseUrl}/v1/car/soft/${carId}`;
+    return this.http.delete(url).pipe(
+      catchError((err) => {
+        const errorMessage = err.error?.message || 'erro ao deletar o carro';
+        return throwError(() => ({
+          status: err.status,
+          message: errorMessage,
+          error: err.error,
+        }));
+      })
+    );
+  }
 }

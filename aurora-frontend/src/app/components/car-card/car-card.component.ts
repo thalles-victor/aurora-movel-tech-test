@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { BackendService } from '../../services/backend.service';
+import { Router } from '@angular/router';
 
 export interface Car {
   id: string;
@@ -23,7 +25,22 @@ export interface Car {
 export class CarCardComponent {
   @Input() car!: Car;
 
-  deleteCar() {
-    console.log('Deletar carro:', this.car.id);
+  constructor(
+    private readonly backendService: BackendService,
+    private router: Router
+  ) {}
+
+  softDeleteCar() {
+    this.backendService.softDeleteCar(this.car.id).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.router.navigate(['/']).then(() => {
+          window.location.reload();
+        });
+      },
+      error: (err) => {
+        alert('error ao deletar o carro');
+      },
+    });
   }
 }
