@@ -1,7 +1,8 @@
-# compiled output
+# Compiled output
 dist
-node_modules
 build
+out-tsc
+bazel-out
 
 # Logs
 logs
@@ -11,24 +12,30 @@ pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
+libpeerconnection.log
+testem.log
+
+# Node
+node_modules
 
 # OS
 .DS_Store
+Thumbs.db
 
 # Tests
 coverage
 .nyc_output
 
 # IDEs and editors
-/.idea
+.idea
 .project
 .classpath
-.c9/
+.c9
 *.launch
-.settings/
+.settings
 *.sublime-workspace
 
-# IDE - VSCode
+# Visual Studio Code
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -54,5 +61,12 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-.env
+
+# Miscellaneous
+.angular
+.sass-cache
+connect.lock
+coverage
+typings
 @Upload
+tmp
