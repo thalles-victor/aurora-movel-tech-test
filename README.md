@@ -58,8 +58,8 @@ POSTGRES_USER=user
 POSTGRES_PASSWORD=pass
 
 # POSTGRES
-ROOT_EMAIL=thalles@gamil.com
-ROOT_PASSWORD=thalles123
+ROOT_EMAIL=rootuser@gmail.com
+ROOT_PASSWORD=root
 
 # JWT
 JWT_SECRET=secret
