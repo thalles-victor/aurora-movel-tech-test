@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable, PLATFORM_ID } from '@angular/core';
 import { catchError, tap, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export type CreateCarDto = {
   licensePlate: string;
@@ -16,7 +17,7 @@ export type CreateCarDto = {
   providedIn: 'root',
 })
 export class BackendService {
-  private apiBaseUrl = 'http://localhost:3000';
+  private apiBaseUrl = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
   createAdmin(email: string) {

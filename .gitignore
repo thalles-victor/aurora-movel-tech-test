@@ -70,3 +70,4 @@ coverage
 typings
 @Upload
 tmp
+environment.ts
