@@ -23,6 +23,10 @@
   width: 100%;
 }
 
+.slogan {
+  font-size: clamp(12px, 3vw, 18px);
+}
+
 .hero img {
   width: 100%;
   height: auto;
@@ -47,7 +51,7 @@
 
 h4 {
   margin: 0 0 10px;
-  font-size: 52px;
+  font-size: clamp(18px, 3vw, 54px);
   color: #66fc03;
 }
 
@@ -78,7 +82,7 @@ p {
   gap: 20px;
 }
 
-button {
+.create-account-button {
   border: 1px solid white;
   border-radius: 6px;
   background-color: transparent;
