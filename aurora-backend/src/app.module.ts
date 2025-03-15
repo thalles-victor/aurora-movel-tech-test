@@ -1,5 +1,4 @@
 import { Module, ValidationPipe } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ENV } from './@shared/env';
@@ -28,7 +27,7 @@ import { ImageEntity } from './Application/Entities/Image.entity';
     CarModule,
     UploadModule,
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [
     {
       provide: APP_PIPE,

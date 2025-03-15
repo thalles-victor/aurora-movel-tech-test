@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import * as path from 'node:path';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ENV } from './@shared/env';
 
 async function bootstrap() {
@@ -22,6 +23,31 @@ async function bootstrap() {
   //   allowedHeaders: 'Content-Type,Authorization',
   //   credentials: true,
   // });
+
+  const config = new DocumentBuilder()
+    .setTitle('Aurora Móvel')
+    .setDescription('The cats API description')
+    .setVersion('1.0')
+    .addTag('cars')
+    .addServer(
+      `${ENV.BACKEND_PROTOCOL}://${ENV.BACKEND_DOMAIN}:${ENV.PORT}`,
+      'Production',
+    )
+    .addTag('Your API Tag')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'jwt',
+        description: 'Enter JWT token',
+        in: 'header',
+      },
+      'jwt',
+    )
+    .build();
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('/', app, documentFactory);
 
   app.enableCors();
 
