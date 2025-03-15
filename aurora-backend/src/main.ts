@@ -16,12 +16,14 @@ async function bootstrap() {
     prefix: '/static/assets',
   });
 
-  app.enableCors({
-    origin: 'http://localhost:4200',
-    methods: 'GET,POST,PUT,DELETE,PATCH',
-    allowedHeaders: 'Content-Type,Authorization',
-    credentials: true,
-  });
+  // app.enableCors({
+  //   origin: 'http://localhost:4200',
+  //   methods: 'GET,POST,PUT,DELETE,PATCH',
+  //   allowedHeaders: 'Content-Type,Authorization',
+  //   credentials: true,
+  // });
+
+  app.enableCors();
 
   await app.listen(process.env.PORT ?? 3000);
 }

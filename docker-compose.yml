@@ -1,4 +1,37 @@
+version: '3'
+
 services:
+  aurora-frontend:
+    container_name: aurora-frontend
+    build:
+      context: "./aurora-frontend"
+      dockerfile: Dockerfile
+    volumes:
+      - ./aurora-frontend:/app
+    ports:
+      - "4200:4200"
+    depends_on:
+      - aurora-backend
+    networks:
+      - aurora-network
+
+  aurora-backend:
+    container_name: aurora-backend
+    build:
+      context: "./aurora-backend"
+      dockerfile: Dockerfile
+    volumes:
+      - ./aurora-backend:/app
+    env_file:
+      - "./aurora-backend/.env"
+    depends_on:
+      - aurora-movel-database 
+    networks:
+      - aurora-network
+    ports:
+      - "3000:3000"
+  
+
   aurora-movel-database:
     container_name : aurora-movel-database 
     image: postgres:15-alpine
