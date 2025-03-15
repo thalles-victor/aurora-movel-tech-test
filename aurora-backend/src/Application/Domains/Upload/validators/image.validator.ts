@@ -8,7 +8,7 @@ import {
 @Injectable()
 export class ImageValidationPipe implements PipeTransform {
   transform(value: Express.Multer.File, metadata: ArgumentMetadata) {
-    const oneKb = 1000;
+    const oneKb = 5000;
     if (!value.mimetype.startsWith('image/')) {
       throw new BadRequestException('only image in this method');
     }

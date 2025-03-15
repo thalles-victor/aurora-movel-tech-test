@@ -1,7 +1,7 @@
 .container {
   position: relative;
   display: flex;
-  width: 900px;
+  width: 820px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
   padding: 16px 10px;
